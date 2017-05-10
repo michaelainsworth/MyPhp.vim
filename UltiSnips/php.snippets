@@ -1,16 +1,25 @@
+snippet op "Open Tags"
+<?php ${0}
+endsnippet
+
 snippet fn "Function"
+/**
+ * ${3:Brief description}
+ * 
+ * ${4:Detailed description}
+ */
 function ${1}(${2}) {
-	${3}
+	${0}
 }
 endsnippet
 
 snippet c "Class"
 /**
- * ${2:Brief description here.}
+ * ${2:Brief description}
  * 
- * ${3:Detailed description here.}
+ * ${3:Detailed description}
  */
-class ${1:Thing} {
+class ${1:`v! substitute(expand('%:p:t'), '.php', '', 'g')`} {
 
 }
 endsnippet
@@ -70,4 +79,96 @@ endsnippet
 #  * ${2:Detailed description here.}
 #  */
 # endsnippet
+
+snippet t "// TODO"
+// TODO: ${1:Brief description}
+endsnippet
+
+snippet cs "Comment Section"
+// ========================================================================
+// ${1:Section description}
+// ========================================================================
+endsnippet
+
+snippet css "Comment Subsection"
+// ------------------------------------------------------------------------
+// ${1:Subsection description}
+// ------------------------------------------------------------------------
+endsnippet
+
+snippet cn "Constructor"
+${1:public} function __construct(${2:arguments}) {
+	$0
+}
+endsnippet
+
+snippet ds "Destructor"
+public function __destruct() {
+	$0
+}
+endsnippet
+
+snippet ms "Magic Method __toString()"
+public function __toString() {
+	$0
+}
+endsnippet
+
+snippet mg "Magic Method __get()"
+public function __get($name) {
+	$0
+}
+endsnippet
+
+snippet ms "Magic Method __set()"
+public function __set($name, $value) {
+	$0
+}
+endsnippet
+
+snippet d "Documentation"
+/**
+ * ${1:Brief description}
+ *
+ * ${2:Detailed description}
+ */
+endsnippet
+
+snippet f "Function Definition"
+function ${1:foobar}(${2:$arguments}) {
+	$0
+}
+endsnippet
+
+snippet af "Anonymous Function Definition"
+function(${1:$arguments}) use(${2:$references}) {
+	$0
+}
+endsnippet
+
+snippet vf "Variable Function Definition"
+${1:$variable} = function(${2:$arguments}) use(${3:$references}) {
+	$0
+};
+endsnippet
+
+snippet mf "Member Function Definition"
+/**
+ * ${4:Brief description}
+ */
+${1:public} function ${2:foobar}(${3:$arguments}) {
+	$0
+}
+endsnippet
+
+snippet r "Return Statement"
+	return ${1:value};
+endsnippet
+
+snippet cb "Comment Block"
+// ============================================================================
+// ${1:Block description}
+// ============================================================================
+
+endsnippet
 
