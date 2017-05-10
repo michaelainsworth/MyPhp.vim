@@ -1,5 +1,17 @@
-snippet op "Open Tags"
-<?php ${0}
+snippet o "Open PHP Tags"
+<?php $0
+endsnippet
+
+snippet l "Close PHP Tags"
+?>$0
+endsnippet
+
+snippet ec "Echo"
+echo ${1:$something}; 
+endsnippet
+
+snippet h "htmlentities"
+htmlentities(${1})
 endsnippet
 
 snippet fn "Function"
@@ -8,8 +20,33 @@ snippet fn "Function"
  * 
  * ${4:Detailed description}
  */
-function ${1}(${2}) {
-	${0}
+function ${1:foo}(${2:$bar}) {
+	$0
+}
+endsnippet
+
+snippet yfn "Anonymous Function Definition"
+function(${1:$arguments}) use(${2:$references}) {
+	$0
+}
+endsnippet
+ 
+snippet ns "Namespace"
+namespace ${1:`!v expand('%:p:h')`};
+endsnippet
+
+snippet u "Use"
+use ${2:`!v substitute(expand('%:p:h'), '/', '\\', 'g')`}\\${1};
+endsnippet
+ 
+snippet in "Interface"
+/**
+ * ${2:Brief description}
+ * 
+ * ${3:Detailed description}
+ */
+interface ${1:`!v substitute(expand('%:p:t'), '.php', '', 'g')`} {
+	$0
 }
 endsnippet
 
@@ -19,69 +56,117 @@ snippet c "Class"
  * 
  * ${3:Detailed description}
  */
-class ${1:`v! substitute(expand('%:p:t'), '.php', '', 'g')`} {
-
+class ${1:`!v substitute(expand('%:p:t'), '.php', '', 'g')`} {
+	$0
 }
 endsnippet
 
-# snippet sfn "Static Member Function"
-# 
-# endsnippet
-# 
-# snippet mfn "Member Function"
-# /**
-#  * ${1:Brief description here.}
-#  *
-#  * ${2:Detailed description here.}
-#  */
-# ${1:public} function ${1}(${2}) {
-# 	${3}
-# }
-# endsnippet
-# 
-# snippet mv "Member Variable"
-# /**
-#  * @var ${2:type}
-#  */
-# private $${1};
-# endsnippet
-# 
-# snippet gfn "Getter Function"
-# /**
-#  * Returns $this->${1}
-#  */
-# public function ${1}() {
-# 	return $this->${1};
-# }
-# endsnippet
-# 
-# 
-# snippet ns "Namespace"
-# namespace ${1};
-# endsnippet
-# 
-# snippet us "Use Directive"
-# use ${1:Something};
-# endsnippet
-# 
-# # TODO: interface, if, while, for, foreach
-# # TODO: Fix comments.
-# # TODO: Constructor
-# 
-# snippet int "Interface"
-# interface
-# endsnippet
-# 
-# snippet tod "Todo"
-# /**
-#  * @todo ${1:Brief description here.}
-#  *
-#  * ${2:Detailed description here.}
-#  */
-# endsnippet
+snippet cn "Constructor"
+/**
+ * ${3:Brief description}
+ * 
+ * ${4:Detailed description}
+ */
+${2:public} function __construct(${1}) {
+	$0
+}
+endsnippet
 
-snippet t "// TODO"
-// TODO: ${1:Brief description}
+snippet ds "Destructor"
+/**
+ * ${1:Brief description}
+ * 
+ * ${2:Detailed description}
+ */
+public function __destruct() {
+	$0
+}
+endsnippet
+
+snippet mfn "Member Function"
+/**
+ * ${4:Brief description}
+ *
+ * ${5:Detailed description}
+ */
+${3:public} function ${1:foo}(${2:$bar}) {
+	$0
+}
+endsnippet
+
+snippet afn "Accessor Function"
+/**
+ * Accessor function for $this->${1}.
+ */
+public function ${1}() {
+	return $this->${1};
+}
+endsnippet
+
+snippet sfn "Static Function"
+/**
+ * ${4:Brief description}
+ *
+ * ${5:Detailed description}
+ */
+static ${3:public} function ${1:foo}(${2:$bar}) {
+	$0
+}
+endsnippet
+
+snippet mv "Member Variable"
+/**
+ * ${2:Brief description}
+ *
+ * ${3:Detailed description}
+ *
+ * @var ${4:type}
+ */
+private $${1};
+endsnippet
+
+snippet i "If"
+if (${1:true}) {
+	$0
+}
+endsnippet
+
+snippet ei "Else If"
+else if (${1:true}) {
+	$0
+}
+endsnippet
+
+snippet e "Else"
+else {
+	$0
+}
+endsnippet
+
+snippet w "While"
+while (${1:true}) {
+	$0
+}
+endsnippet
+
+snippet f "For"
+for (${1:$i = 0}; ${2:$i < $size}; ${3:++$i}) {
+	$0
+}
+endsnippet
+
+snippet fe "Foreach"
+foreach (${1:$array} as ${2:$key} => ${3:$value}) {
+	$0
+}
+endsnippet
+
+snippet tod "Todo"
+/**
+ * @todo ${1:Brief description}
+ *
+ * ${2:Detailed description}
+ */
 endsnippet
 
 snippet cs "Comment Section"
@@ -96,37 +181,40 @@ snippet css "Comment Subsection"
 // ------------------------------------------------------------------------
 endsnippet
 
-snippet cn "Constructor"
-${1:public} function __construct(${2:arguments}) {
-	$0
-}
-endsnippet
-
-snippet ds "Destructor"
-public function __destruct() {
-	$0
-}
-endsnippet
-
-snippet ms "Magic Method __toString()"
+snippet mstr "Magic Method __toString()"
+/**
+ * ${1:Brief description}
+ *
+ * ${2:Detailed description}
+ */
 public function __toString() {
 	$0
 }
 endsnippet
 
 snippet mg "Magic Method __get()"
+/**
+ * ${1:Brief description}
+ *
+ * ${2:Detailed description}
+ */
 public function __get($name) {
 	$0
 }
 endsnippet
 
 snippet ms "Magic Method __set()"
+/**
+ * ${1:Brief description}
+ *
+ * ${2:Detailed description}
+ */
 public function __set($name, $value) {
 	$0
 }
 endsnippet
 
-snippet d "Documentation"
+snippet dox "Documentation"
 /**
  * ${1:Brief description}
  *
@@ -134,41 +222,51 @@ snippet d "Documentation"
  */
 endsnippet
 
-snippet f "Function Definition"
-function ${1:foobar}(${2:$arguments}) {
-	$0
-}
-endsnippet
-
-snippet af "Anonymous Function Definition"
-function(${1:$arguments}) use(${2:$references}) {
-	$0
-}
-endsnippet
-
-snippet vf "Variable Function Definition"
-${1:$variable} = function(${2:$arguments}) use(${3:$references}) {
-	$0
-};
-endsnippet
-
-snippet mf "Member Function Definition"
-/**
- * ${4:Brief description}
- */
-${1:public} function ${2:foobar}(${3:$arguments}) {
-	$0
-}
-endsnippet
-
 snippet r "Return Statement"
-	return ${1:value};
+return ${1:value};
 endsnippet
 
-snippet cb "Comment Block"
-// ============================================================================
-// ${1:Block description}
-// ============================================================================
+snippet i: "If (Embedded)"
+<?php if (${1:true}) : ?>
+endsnippet
 
+snippet e: "Else (Embedded)"
+<?php else : ?>
+endsnippet
+
+snippet ei: "Else If (Embedded)"
+<?php else if (${1:true}) : ?>
+endsnippet
+
+snippet eni: "End If (Embedded)"
+<?php endif; ?>
+endsnippet
+
+snippet w: "While (Embedded)"
+<?php while (${1:true}) : ?>
+endsnippet
+
+snippet ew: "End While (Embedded)"
+<?php endwhile; ?>
+endsnippet
+
+snippet f: "For (Embedded)"
+<?php for (${1:$i = 0}; ${2:$i < $size}; ${3:++$i}) : ?>
+endsnippet
+
+snippet ef: "End For (Embedded)"
+<?php endfor; ?>
+endsnippet
+
+snippet fe: "Foreach (Embedded)"
+<?php foreach (${1:$array} as ${2:$key} => ${3:$value}) : ?>
+endsnippet
+
+snippet efe: "End Foreach (Embedded)"
+<?php endforeach; ?>
+endsnippet
+
+snippet v: "Variable (Embedded)"
+<?php ${1:$variable} = ${2:$value}; ?>
 endsnippet
 
