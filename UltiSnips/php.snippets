@@ -1,0 +1,73 @@
+snippet fn "Function"
+function ${1}(${2}) {
+	${3}
+}
+endsnippet
+
+snippet c "Class"
+/**
+ * ${2:Brief description here.}
+ * 
+ * ${3:Detailed description here.}
+ */
+class ${1:Thing} {
+
+}
+endsnippet
+
+# snippet sfn "Static Member Function"
+# 
+# endsnippet
+# 
+# snippet mfn "Member Function"
+# /**
+#  * ${1:Brief description here.}
+#  *
+#  * ${2:Detailed description here.}
+#  */
+# ${1:public} function ${1}(${2}) {
+# 	${3}
+# }
+# endsnippet
+# 
+# snippet mv "Member Variable"
+# /**
+#  * @var ${2:type}
+#  */
+# private $${1};
+# endsnippet
+# 
+# snippet gfn "Getter Function"
+# /**
+#  * Returns $this->${1}
+#  */
+# public function ${1}() {
+# 	return $this->${1};
+# }
+# endsnippet
+# 
+# 
+# snippet ns "Namespace"
+# namespace ${1};
+# endsnippet
+# 
+# snippet us "Use Directive"
+# use ${1:Something};
+# endsnippet
+# 
+# # TODO: interface, if, while, for, foreach
+# # TODO: Fix comments.
+# # TODO: Constructor
+# 
+# snippet int "Interface"
+# interface
+# endsnippet
+# 
+# snippet tod "Todo"
+# /**
+#  * @todo ${1:Brief description here.}
+#  *
+#  * ${2:Detailed description here.}
+#  */
+# endsnippet
+
