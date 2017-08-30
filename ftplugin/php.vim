@@ -36,14 +36,30 @@ command! PhpLint :call <SID>PhpLint(expand('%:p'))
 
 " Changes 'private $thing;' to an accessor function.
 function! s:PhpVariableToAccessor() range
-    '<,'>s/^\(\s\+\)private \$\([a-zA-Z0-9_]\+\);\s*$/\1public function \2() {\1\1return $this->\2;\1}/g
+    '<,'>s/^\(\s*\)\(private\|protected\|public\) \$\([a-zA-Z0-9_]\+\);\s*$/\1public function \3() {\1\1return $this->\3;\1}/g
 endfunction!
 command! -range PhpVariableToAccessor :call <SID>PhpVariableToAccessor()
 
 " Changes 'private $thing;' to an assignment.
 " I.e., to be used in a constructor.
 function! s:PhpVariableToAssignment() range
-    '<,'>s/^\(\s\+\)private \$\([a-zA-Z0-9_]\+\);\s*$/\1$this->\2 = $\2;/g
+    '<,'>s/^\(\s\+\)\(private\|protected\|public\) \$\([a-zA-Z0-9_]\+\);\s*$/\1$this->\3 = $\3;/g
 endfunction!
 command! -range PhpVariableToAssignment :call <SID>PhpVariableToAssignment()
+
+" Tabulates values in an array so that they are
+" aligned by the "=>" characters.
+function! s:PhpArrowTabulate()
+    Tab /=>
+endfunction
+command! -range PhpArrowTabulate :call <SID>PhpArrowTabulate()
+vnoremap <leader>> :call <SID>PhpArrowTabulate()<cr>
+
+" Tabulates values in a list of assignments so that they are
+" aligned by the "=" character.
+function! s:PhpEqualsTabulate()
+    Tab /=
+endfunction
+command! -range PhpEqualsTabulate :call <SID>PhpEqualsTabulate()
+vnoremap <leader>= :call <SID>PhpEqualsTabulate()<cr>
 
