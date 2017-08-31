@@ -52,14 +52,14 @@ command! -range PhpVariableToAssignment :call <SID>PhpVariableToAssignment()
 function! s:PhpArrowTabulate()
     '<,'>Tab /=>
 endfunction
-command! PhpArrowTabulate :call <SID>PhpArrowTabulate()
-vnoremap <leader>> :call <SID>PhpArrowTabulate()
+command! -range PhpArrowTabulate :call <SID>PhpArrowTabulate()
+vnoremap <leader>> :call <SID>PhpArrowTabulate()<cr>
 
 " Tabulates values in a list of assignments so that they are
 " aligned by the "=" character.
 function! s:PhpEqualsTabulate()
     '<,'>Tab /=
 endfunction
-command! PhpEqualsTabulate :call <SID>PhpEqualsTabulate()
+command! -range PhpEqualsTabulate :call <SID>PhpEqualsTabulate()
 vnoremap <leader>= :call <SID>PhpEqualsTabulate()<cr>
 
