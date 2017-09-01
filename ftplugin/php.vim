@@ -51,6 +51,25 @@ command! -range PhpVariableToAssignment :call <SID>PhpVariableToAssignment()
 " aligned by the "=>" characters.
 function! s:PhpArrowTabulate()
     '<,'>Tab /=>
+    " The following tabulation works in the format:
+    "
+    "     $x =
+    "     [
+    "           'a' => 1
+    "         , 'this' => 2
+    "         , 'that there' => 3
+    "     ];
+    "
+    " It would produce:
+    "
+    "     $x =
+    "     [
+    "           'a'          => 1
+    "         , 'this'       => 2
+    "         , 'that there' => 3
+    "     ];
+    "
+    " '<,'>Tab /\('[^']\+'\|"[^"]\+"\)
 endfunction
 command! -range PhpArrowTabulate :call <SID>PhpArrowTabulate()
 vnoremap <leader>> :call <SID>PhpArrowTabulate()<cr>
@@ -62,4 +81,23 @@ function! s:PhpEqualsTabulate()
 endfunction
 command! -range PhpEqualsTabulate :call <SID>PhpEqualsTabulate()
 vnoremap <leader>= :call <SID>PhpEqualsTabulate()<cr>
+
+function! s:PhpSortUses()
+    let l:old_p = getpos('.')
+    let l:old_a = getpos("'a")
+    let l:old_b = getpos("'b")
+
+    try
+        normal gg/^usema
+        normal G?^usemb
+
+        'a,'b!sort -u
+    finally
+        call setpos("'a", l:old_a)
+        call setpos("'b", l:old_b)
+        call setpos(".", l:old_p)
+    endtry
+endfunction
+command! PhpSortUses :call <SID>PhpSortUses()
+nnoremap <leader>u :call <SID>PhpSortUses()<cr>
 
