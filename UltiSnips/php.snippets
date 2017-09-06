@@ -6,6 +6,14 @@ snippet l "Close PHP Tags"
 ?>$0
 endsnippet
 
+snippet ece: "Echo Escaped Html (Embedded)"
+<?php echo $this->escapeHtml(${1:$variable}); ?>
+endsnippet
+
+snippet ec: "Echo (Embedded)"
+<?php echo ${1:$variable}; ?>
+endsnippet
+
 snippet ec "Echo"
 echo ${1:$something}; 
 endsnippet
