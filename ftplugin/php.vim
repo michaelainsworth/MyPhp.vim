@@ -77,7 +77,7 @@ vnoremap <leader>> :call <SID>PhpArrowTabulate()<cr>
 " Tabulates values in a list of assignments so that they are
 " aligned by the "=" character.
 function! s:PhpEqualsTabulate()
-    '<,'>Tab /=
+    '<,'>Tab / = 
 endfunction
 command! -range PhpEqualsTabulate :call <SID>PhpEqualsTabulate()
 vnoremap <leader>= :call <SID>PhpEqualsTabulate()<cr>
