@@ -101,3 +101,5 @@ endfunction
 command! PhpSortUses :call <SID>PhpSortUses()
 nnoremap <leader>u :call <SID>PhpSortUses()<cr>
 
+set iskeyword=$,a-z,A-Z,48-57,_-_,.,-,>
+
