@@ -9,8 +9,10 @@ setlocal tabstop=4
 setlocal textwidth=79
 setlocal colorcolumn=0
 setlocal suffixesadd=.php
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%80v.\+/
+
+"This code hilighted long columns, which I'm no longer using.
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%80v.\+/
 
 " PHP error checking
 function! s:PhpLint(filename)
