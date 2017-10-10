@@ -105,3 +105,8 @@ nnoremap <leader>u :call <SID>PhpSortUses()<cr>
 
 setlocal iskeyword=$,a-z,A-Z,48-57,_-_
 
+function! s:PhpTrimCommentSections()
+    g/====/normal 80|D
+endfunction
+command! PhpTrimCommentSections :call <SID>PhpTrimCommentSections()
+nnoremap <leader>t :call <SID>PhpTrimCommentSections()<cr>
