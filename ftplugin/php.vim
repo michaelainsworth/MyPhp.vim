@@ -110,3 +110,46 @@ function! s:PhpTrimCommentSections()
 endfunction
 command! PhpTrimCommentSections :call <SID>PhpTrimCommentSections()
 nnoremap <leader>t :call <SID>PhpTrimCommentSections()<cr>
+
+" Fixes the length of a function line, by changing from:
+"
+"     $foo->bar(1, 2, 3);
+"
+" to:
+"
+"     $foo->bar(
+"         1,
+"         2,
+"         3
+"     );
+function! s:PhpFixFunctionLength()
+    let l:line = getline('.')
+    let l:parts = split(l:line, '(')
+
+    if len(l:parts) <= 1
+        return
+    endif
+
+    normal 0f(li
+
+    while 1
+        let l:line = getline('.')
+        let l:parts = split(l:line, ',')
+
+        if len(l:parts) > 1
+            normal 0f,li
+        else
+            let l:line = getline('.')
+            let l:parts = split(l:line, ')')
+
+            if len(l:parts) <= 1
+                return
+            else
+                normal 0f)i
+                return
+            endif
+        endif
+    endwhile
+endfunction
+command! PhpFixFunctionLength :call <SID>PhpFixFunctionLength()
+
