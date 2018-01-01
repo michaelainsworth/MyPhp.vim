@@ -153,3 +153,5 @@ function! s:PhpFixFunctionLength()
 endfunction
 command! PhpFixFunctionLength :call <SID>PhpFixFunctionLength()
 
+nnoremap <leader>pf :PhpFixFunctionLength<cr>
+
